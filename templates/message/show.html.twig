@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message
+{% endblock %}
+
+{% block body %}
+	<div class="container col-md-6 col-sm-12 my-5">
+		<div class="card p-3" id="card">
+			<div class="body">
+				<h1>{{message.user.name}}</h1>
+				<div class="d-flex">
+					{% for c in message.categories %}
+						<p class="mx-1 p-1 rounded" style="background-color:{{c.color}}">{{c}}
+						</p>
+					{% endfor %}
+				</div>
+				<p>{{message.getDatePost().format('Y-m-d')}}</p>
+				<p>{{message.text}}</p>
+				<div class="text-end">
+					<a href="{{path('app_commentaire_new',{'id':message.id})}}" class="btn btn-primary">Poster un commentaire</a>
+				</div>
+			</div>
+		</div>
+		<div class="card p-2 comment-section" id="card">
+			{% if message.commentaires.count > 0 %}
+				{% for c in message.commentaires %}
+					<h5>{{c.user.name}}
+						a commenté :</h5>
+					<p>{{c.text}}</p>
+				{% endfor %}
+			{% else %}
+				<h4 class="text-center">Soyez le premier a commenter !</h4>
+			{% endif %}
+
+		</div>
+		<a href="{{path('home')}}">back</a>
+	</div>
+{% endblock %}

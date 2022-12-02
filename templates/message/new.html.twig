@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Message
+{% endblock %}
+
+{% block body %}
+	<div class="container col-md-6 col-sm-12 my-5">
+		<h1>Create new Message</h1>
+
+		{{ include('message/_form.html.twig') }}
+	</div>
+
+{% endblock %}

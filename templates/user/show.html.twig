@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User
+{% endblock %}
+
+{% block body %}
+
+	<div class="container col-md-6 col-sm 12 my-5">
+		<div class="card p-3" id="card">
+			<h3>{{user.name}}</h3>
+			<h5>{{user}}</h5>
+			<p>Postes en ligne :
+				{{user.messages.count}}</p>
+			<p>Commentaires postés :
+				{{user.commentaires.count}}</p>
+			{% if app.user == user %}
+				<a href="{{path('logout')}}" class="btn btn-secondary">logout</a>
+			{% endif %}
+		</div>
+
+	</div>
+	<div class="container">
+		<div class="row justify-content-center">
+			{% for m in user.messages %}
+				<div class="col-md-3 col-sm-5">
+					<div class="card p-2 my-2" id="card">
+						<div class="card-title d-flex flex-column justify-content-between">
+							<div>
+								<div class="d-flex">
+									{% for c in m.categories %}
+										<p style="background-color:{{c.color}}" class="mx-1 rounded p-1">{{c.name}}</p>
+									{% endfor %}
+								</div>
+								<p>{{m.getDatePost().format('Y-m-d')}}</p>
+								<p>{{m.text}}</p>
+							</div>
+							<div class="btn-group">
+								<a href="{{path('app_message_edit',{'id':m.id})}}" class="btn btn-primary">Edit</a>
+
+								<!--NON FONCTIONNEL -->
+								<a href="{{path('app_message_delete',{'id':m.id})}}" class="btn btn-danger">Delete</a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<a href="{{path('home')}}">back</a>
+		</div>
+	</div>
+
+{% endblock %}

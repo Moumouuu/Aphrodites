@@ -4,5 +4,127 @@
 {% endblock %}
 
 {% block body %}
-	<button class="btn btn-primary">yolo</button>
-{% endblock %}
+
+	<div class="row">
+		<div class="col-md-3 col-sm-4 col-4 vh-100 " id="nav">
+			<div class="nav d-flex flex-column justify-content-between vh-100 align-items-center">
+				<div>
+					<div class="d-flex align-items-center">
+						<img src="../images/AphroditesLogo.png" alt="logo Aphrodites" class="my-3" id="logo">
+						<h3 class="d-none d-sm-block d-md-block">phrodites</h3>
+					</div>
+					<div class="d-flex my-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-house-fill" viewbox="0 0 16 16">
+							<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+							<path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+						</svg>
+						<a href="{{path('home')}}" class="nav-link">
+							<h4 class="text-black">Accueil</h4>
+						</a>
+					</div>
+					<div class="d-flex my-2 ">
+						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-person-fill" viewbox="0 0 16 16">
+							<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+						</svg>
+						{% if app.user %}
+							<a href="{{path('app_user_show',{'id':app.user.id})}}" class="nav-link">
+								<h4 class="text-black">Profil</h4>
+							</a>
+						{% else %}
+							<a href="{{path('login')}}" class="nav-link">
+								<h4 class="text-black">Login</h4>
+							</a>
+						{% endif %}
+
+
+					</div>
+					<div class="d-flex my-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-patch-plus-fill" viewbox="0 0 16 16">
+							<path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+						</svg>
+						<a href="{{path('info')}}" class="nav-link">
+							<h4 class="text-black">Info</h4>
+						</a>
+					</div>
+				</div>
+				<div class="text-center">
+					<div class="btn-group flex-sm-column flex-column flex-md-row">
+						<a href="{{path('app_message_new')}}" class="nav-link btn " id="button">
+							<h4 class="text-center text-white">Poster</h4>
+						</a>
+						<a href="https://forms.gle/BsZxfFhzekqhExcx7" class="nav-link btn " id="button">
+							<h4 class="text-center text-white">Quizz</h4>
+						</a>
+					</div>
+					<div class="d-flex my-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-person-fill" viewbox="0 0 16 16">
+							<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+						</svg>
+						{% if app.user %}
+							<h5 class="mx-2">{{app.user.name}}</h5>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-7 col-8 overflow-auto vh-100">
+			{% for m in messages %}
+				<div class="card my-4 mx-1" id="card">
+					<div class="card-body">
+						<div class="d-flex">
+							<h5 class="card-title mx-1">{{m.user.name}}</h5>
+							{% for c in m.categories %}
+								<p class="mx-1 px-1 rounded" style="background-color:{{c.color}}">{{c.name}}
+								</p>
+							{% endfor %}
+						</div>
+						<p class="card-text">{{m.text}}</p>
+						<a href="{{path('app_message_show',{'id':m.id})}}" class="btn text-white" id="comment-btn">{{m.commentaires.count}}
+							Commentaires</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="col-md col-sm-3 d-block d-sm-none d-none d-md-block vh-100 py-3" id="card">
+			<div class="d-flex flex-column">
+				<h3 class="text-center">FAQ :</h3>
+				<ul>
+					<li>
+						<a href="https://www.ameli.fr/assure/sante/themes/mst-ist/maladies-infections-sexuellement-transmissibles#:~:text=Les%20infections%20sexuellement%20transmissibles%20ou,et%20transmises%20par%20voie%20sexuelle.">Qu'est-ce qu'une IST ?</a>
+					</li>
+					<li>
+						<a href="https://www.ameli.fr/assure/sante/themes/mst-ist/maladies-infections-sexuellement-transmissibles#:~:text=Les%20infections%20sexuellement%20transmissibles%20(IST,sexuelles%2C%20avec%20ou%20sans%20p%C3%A9n%C3%A9tration.">IST ou MST ?</a>
+					</li>
+					<li>
+						<a href="https://www.livi.fr/sante/infections-sexuellement-transmissibles/">Quel traitement pour une IST ?</a>
+					</li>
+					<li>
+						<a href="https://www.zanzu.de/fr/planification-familiale-et-grossesse/sexe-pendant-et-apres-la-grossesse/transmission-des-infections-de-la-mere-au-foetus/">Transmission des infections de la mère au fœtus</a>
+					</li>
+					<li>
+						<a href="https://www.ameli.fr/assure/sante/themes/mst-ist/symptomes-diagnostic-evolution">Symptômes, diagnostic et évolution des IST</a>
+					</li>
+				</ul>
+				<h3 class="text-center">Top Message :</h3>
+				{% set max = -1 %}
+				{% set message = null %}
+				{% for m in messages %}
+					{% if m.commentaires.count > max %}
+						{% set max = m.commentaires.count %}
+						{% set message = m %}
+					{% endif %}
+				{% endfor %}
+				{% if message != null %}
+					<div class="d-flex flex-column shadow border border-dark rounded-3 p-3 m-2">
+						<p>{{message.user.name}}</p>
+						<p>{{message.getDatePost().format('Y-m-d')}}</p>
+						<p>{{message.text}}</p>
+						<div class="text-end">
+							<a href="{{path('app_message_show',{'id':message.id})}}" class="btn text-white" id="comment-btn">{{message.commentaires.count}}
+								commentaires</a>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endblock %}

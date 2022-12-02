@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div class="btn-group my-2">
+	<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+	<a href="{{path('home')}}" class="btn btn-secondary">back</a>
+</div>
+
+
+{{ form_end(form) }}

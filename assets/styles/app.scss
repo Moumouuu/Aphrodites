@@ -1,7 +1,35 @@
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
 
+$peche :#EE9C6F;
+$pecheClaire : #F5B593;
+$rose: #de679f;
 
 body {
-    background-color: white;
+    background-color: $pecheClaire;
+}
+
+#nav {
+    background-color: $peche;
+}
+
+#button {
+    background-color: $rose;
+}
+
+#logo {
+    width: 6rem;
+}
+
+#card {
+    background-color: $peche;
+}
+
+#comment-btn {
+    background-color: $rose;
+}
+
+.comment-section {
+    height: 30vh;
+    overflow-y: scroll;
 }
