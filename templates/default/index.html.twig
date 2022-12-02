@@ -70,11 +70,13 @@
 				<div class="card my-4 mx-1" id="card">
 					<div class="card-body">
 						<div class="d-flex">
-							<h5 class="card-title mx-1">{{m.user.name}}</h5>
-							{% for c in m.categories %}
-								<p class="mx-1 px-1 rounded" style="background-color:{{c.color}}">{{c.name}}
-								</p>
-							{% endfor %}
+							<h5 class="card-title mx-1 ">{{m.user.name}}</h5>
+							<div class="d-flex overflow-scroll">
+								{% for c in m.categories %}
+									<p class="mx-1 px-1 rounded" style="background-color:{{c.color}}">{{c.name}}
+									</p>
+								{% endfor %}
+							</div>
 						</div>
 						<p class="card-text">{{m.text}}</p>
 						<a href="{{path('app_message_show',{'id':m.id})}}" class="btn text-white" id="comment-btn">{{m.commentaires.count}}
